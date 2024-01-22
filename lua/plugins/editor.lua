@@ -24,27 +24,6 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
-    "ggandor/flit.nvim",
-    dependencies = {
-      "ggandor/leap.nvim",
-      "tpope/vim-repeat",
-    },
-    opts = {
-      labeled_modes = "nx",
-    },
-  },
-  {
-    "flash.nvim",
-    -- enabled = false,
-    opts = {
-      modes = {
-        char = {
-          keys = {},
-        },
-      },
-    },
-  },
-  {
     -- need make a dir for this plugin, but it seems rare.
     -- mkdir ~/.cache/nvim/
     "declancm/maximize.nvim",

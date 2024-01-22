@@ -1,6 +1,33 @@
 return {
   { "unblevable/quick-scope" },
   {
+    "akinsho/bufferline.nvim",
+    keys = {
+      {
+        "<leader>jb",
+        mode = { "n", "x", "o" },
+        "<cmd>BufferLinePick<cr>",
+        desc = "Jump to indexed buffer",
+      },
+      {
+        "<leader>jB",
+        mode = { "n", "x", "o" },
+        "<cmd>BufferLinePickClose<cr>",
+        desc = "Close indexed buffer",
+      },
+    },
+  },
+  {
+    "ggandor/flit.nvim",
+    dependencies = {
+      "ggandor/leap.nvim",
+      "tpope/vim-repeat",
+    },
+    opts = {
+      labeled_modes = "nx",
+    },
+  },
+  {
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
@@ -9,6 +36,11 @@ return {
     opts = {
       label = {
         after = { 0, 2 },
+      },
+      modes = {
+        char = {
+          keys = {},
+        },
       },
     },
     -- stylua: ignore
@@ -24,64 +56,36 @@ return {
     "phaazon/hop.nvim",
     event = "BufRead",
     config = function()
-      require("hop").setup()
-      -- vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-      -- vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
-      vim.api.nvim_set_keymap(
-        "n",
-        "jw",
-        "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "v",
-        "jw",
-        "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "o",
-        "jw",
-        "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.BEGIN, inclusive_jump = true })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "jr",
-        "<cmd> lua require'hop'.hint_lines({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "v",
-        "jr",
-        "<cmd> lua require'hop'.hint_lines({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "o",
-        "jr",
-        "<cmd> lua require'hop'.hint_lines({ hint_position = require'hop.hint'.HintPosition.BEGIN, inclusive_jump = true })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "jf",
-        "<cmd> lua require'hop'.hint_patterns({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "v",
-        "jf",
-        "<cmd> lua require'hop'.hint_patterns({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "o",
-        "jf",
-        "<cmd> lua require'hop'.hint_patterns({ hint_position = require'hop.hint'.HintPosition.BEGIN, inclusive_jump = true })<cr>",
-        {}
-      )
+      -- you can configure Hop the way you like here; see :h hop-config
+      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
     end,
+    keys = {
+      {
+        "<leader>jw",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_words({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        -- "<cmd>BufferLinePick<cr>",
+        desc = "Hop to word",
+      },
+      {
+        "<leader>jr",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_lines({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        desc = "Hop to word",
+      },
+      {
+        "<leader>jf",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_patterns({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        desc = "Find and Hop(DEPRECATED)",
+      },
+    },
   },
 
   {

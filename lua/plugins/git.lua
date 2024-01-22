@@ -23,9 +23,32 @@ return {
     config = true,
   },
   { "sindrets/diffview.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
-  -- { -- https://github.com/ThePrimeagen/git-worktree.nvim
-  --   "ThePrimeagen/git-worktree.nvim",
-  -- }, -- this is not updated recently
+  { -- https://github.com/ThePrimeagen/git-worktree.nvim
+    "ThePrimeagen/git-worktree.nvim",
+    keys = {
+      {
+        "<leader>gw",
+        function()
+          require("telescope").extensions.git_worktree.git_worktrees()
+        end,
+        desc = "Worktree list",
+      },
+      {
+        "<leader>gt",
+        function()
+          require("telescope").extensions.git_worktree.create_git_worktree()
+        end,
+        desc = "Worktree create",
+      },
+    },
+    dependencies = {
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    config = function()
+      require("telescope").load_extension("git_worktree")
+    end,
+  }, -- this is not updated recently
   -- {
   --   -- https://github.com/ruifm/gitlinker.nvim
   --   "ruifm/gitlinker.nvim",
