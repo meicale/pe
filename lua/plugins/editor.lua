@@ -18,6 +18,20 @@ return {
     },
   },
   {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      window = {
+        position = "float",
+        mappings = {
+          ["S"] = false,
+          ["s"] = false,
+          ["\\"] = "open_vsplit",
+          ["-"] = "open_split",
+        },
+      },
+    },
+  },
+  {
     "stevearc/oil.nvim",
     opts = {},
     -- Optional dependencies

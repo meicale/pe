@@ -1,6 +1,8 @@
 return {
   -- Git
-  { "tpope/vim-fugitive" },
+  {
+    "tpope/vim-fugitive",
+  },
   {
     "f-person/git-blame.nvim",
     config = function()
