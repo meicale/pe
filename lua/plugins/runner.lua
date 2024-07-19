@@ -14,6 +14,7 @@ return {
       })
     end,
   },
+  -- this is base on https://github.com/Zeioth/compiler.nvim
   {
     "Zeioth/compiler.nvim",
     cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
@@ -38,7 +39,7 @@ return {
   },
   {
     "pianocomposer321/officer.nvim",
-    dependencies = "stevearc/overseer.nvim",
+    dependencies = { "stevearc/overseer.nvim" },
     config = function()
       require("officer").setup({
         -- config
@@ -60,6 +61,13 @@ return {
           "on_result_diagnostics",
         },
       })
+      -- this can not be set using lazyvim keys method.
+      vim.keymap.set(
+        "n",
+        "<LEADER><CR>",
+        require("overseer.overseer_util").restart_last_task,
+        { desc = "Repeat last Command" }
+      )
     end,
   },
   {

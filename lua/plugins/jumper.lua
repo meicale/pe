@@ -1,6 +1,33 @@
 return {
   { "unblevable/quick-scope" },
   {
+    "akinsho/bufferline.nvim",
+    keys = {
+      {
+        "<leader>jb",
+        mode = { "n", "x", "o" },
+        "<cmd>BufferLinePick<cr>",
+        desc = "Jump to indexed buffer",
+      },
+      {
+        "<leader>jB",
+        mode = { "n", "x", "o" },
+        "<cmd>BufferLinePickClose<cr>",
+        desc = "Close indexed buffer",
+      },
+    },
+  },
+  {
+    "ggandor/flit.nvim",
+    dependencies = {
+      "ggandor/leap.nvim",
+      "tpope/vim-repeat",
+    },
+    opts = {
+      labeled_modes = "nx",
+    },
+  },
+  {
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
@@ -9,6 +36,11 @@ return {
     opts = {
       label = {
         after = { 0, 2 },
+      },
+      modes = {
+        char = {
+          keys = {},
+        },
       },
     },
     -- stylua: ignore
@@ -82,6 +114,33 @@ return {
         {}
       )
     end,
+    keys = {
+      {
+        "<leader>jw",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_words({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        -- "<cmd>BufferLinePick<cr>",
+        desc = "Hop to word",
+      },
+      {
+        "<leader>jr",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_lines({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        desc = "Hop to word",
+      },
+      {
+        "<leader>jf",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_patterns({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        desc = "Find and Hop(DEPRECATED)",
+      },
+    },
   },
 
   {
