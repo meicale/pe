@@ -14,6 +14,9 @@ return {
   },
   {
     "NeogitOrg/neogit",
+    -- TODO:
+    -- this is for neovim v0.9, need to be moved when update neovim
+    tag = "v0.0.1",
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
       "sindrets/diffview.nvim", -- optional - Diff integration
@@ -57,4 +60,18 @@ return {
   --   dependencies = { "nvim-lua/plenary.nvim" },
   -- },
   -- { "lewis6991/gitsigns.nvim" }, -- this is provided by lazyvim
+
+  -- github -- this can be configed using extra
+  -- {
+  --   "pwntester/octo.nvim",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --     -- OR 'ibhagwan/fzf-lua',
+  --     "nvim-tree/nvim-web-devicons",
+  --   },
+  --   config = function()
+  --     require("octo").setup()
+  --   end,
+  -- },
 }

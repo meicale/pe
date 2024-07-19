@@ -1,5 +1,15 @@
 return {
   {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
+  },
+  {
     "max397574/better-escape.nvim",
     config = function()
       require("better_escape").setup()
@@ -33,50 +43,105 @@ return {
   },
   {
     "stevearc/oil.nvim",
-    opts = {},
-    -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-  {
-    "ggandor/flit.nvim",
-    dependencies = {
-      "ggandor/leap.nvim",
-      "tpope/vim-repeat",
-    },
-    opts = {
-      labeled_modes = "nx",
-    },
-  },
-  {
-    "flash.nvim",
-    -- enabled = false,
-    opts = {
-      modes = {
-        char = {
-          keys = {},
+    -- opts = {
+    --   default_file_explorer = true,
+    --   delete_to_trash = true,
+    --   skip_confirm_for_simple_edits = true,
+    --   view_options = {
+    --     show_hidden = true,
+    --     natural_order = true,
+    --     is_always_hidden = function(name, _)
+    --       return name == ".."
+    --     end,
+    --   },
+    --   win_options = {
+    --     wrap = true,
+    --   },
+    -- },
+    -- https://github.com/stevearc/oil.nvim?tab=readme-ov-file#options
+    config = function()
+      require("oil").setup({
+        default_file_explorer = true,
+        delete_to_trash = true,
+        skip_confirm_for_simple_edits = true,
+        view_options = {
+          show_hidden = true,
+          natural_order = true,
+          is_always_hidden = function(name, _)
+            return name == ".." or name == ".git"
+          end,
         },
+        win_options = {
+          wrap = true,
+        },
+        -- Keymaps in oil buffer. Can be any value that `vim.keymap.set` accepts OR a table of keymap
+        -- options with a `callback` (e.g. { callback = function() ... end, desc = "", mode = "n" })
+        -- Additionally, if it is a string that matches "actions.<name>",
+        -- it will use the mapping at require("oil.actions").<name>
+        -- Set to `false` to remove a keymap
+        -- See :help oil-actions for a list of all available actions
+        keymaps = {
+
+          ["<C-h>"] = false,
+          ["<C-e>"] = { "actions.select", opts = { horizontal = true } },
+          -- ["<C-a>"] = { "actions.select_split", opts = { horizontal = true } },
+          -- ["<C-c>"] = { "actions.select_vsplit", opts = { horizontal = true } },
+          -- ["<C-b>"] = { "actions.select_split" },
+          -- ["<C-d>"] = { "actions.select_vsplit" },
+          ["<C-l>"] = false,
+          ["<C-r>"] = "actions.refresh",
+          -- ["<C-l>"] = "actions.refresh",
+        },
+        -- keymaps = {
+        --   ["g?"] = "actions.show_help",
+        --   ["<CR>"] = "actions.select",
+        --   ["<C-s>"] = false,
+        --   -- ["<C-s>"] = { "actions.select", opts = { vertical = true } },
+        --   ["<C-a>"] = { "actions.select", opts = { vertical = true } },
+        --   ["<C-h>"] = false,
+        --   -- ["<C-h>"] = { "actions.select", opts = { horizontal = true } },
+        --   ["<C-t>"] = { "actions.select", opts = { tab = true } },
+        --   ["<C-p>"] = "actions.preview",
+        --   ["<C-c>"] = "actions.close",
+        --   ["<C-l>"] = false,
+        --   ["<C-r>"] = "actions.refresh",
+        --   -- ["<C-l>"] = "actions.refresh",
+        --   ["-"] = "actions.parent",
+        --   ["_"] = "actions.open_cwd",
+        --   ["`"] = "actions.cd",
+        --   ["~"] = { "actions.cd", opts = { scope = "tab" } },
+        --   ["gs"] = "actions.change_sort",
+        --   ["gx"] = "actions.open_external",
+        --   ["g."] = "actions.toggle_hidden",
+        --   ["g\\"] = "actions.toggle_trash",
+        -- },
+      })
+    end,
+  },
+  {
+    "folke/which-key.nvim",
+    -- this is for the user defined which-key group
+    opts = {
+      spec = {
+        { "<leader>n", group = "Noicer" },
+        { "<leader>r", group = "Runner" },
+        { "<leader>j", group = "Jumper" },
       },
     },
   },
   {
-    -- need make a dir for this plugin, but it seems rare.
-    -- mkdir ~/.cache/nvim/
-    "declancm/maximize.nvim",
-    config = function()
-      vim.keymap.set("n", "<Leader>z", "<Cmd>lua require('maximize').toggle()<CR>")
-      -- this doesn't work!
-      -- local function maximize_status()
-      --   return vim.t.maximized and "   " or ""
-      -- end
-      -- require("maximize").setup({
-      --   sections = {
-      --     lualine_c = { maximize_status },
-      --   },
-      -- })
-    end,
-  },
-  {
     "folke/zen-mode.nvim",
+    dependencies = {
+      {
+        "folke/twilight.nvim",
+        opts = {
+          dimming = {
+            alpha = 0.5,
+          },
+        },
+      },
+    },
     keys = {
       {
         "<leader>z",
@@ -92,7 +157,60 @@ return {
       },
     },
   },
-
+  {
+    "folke/noice.nvim",
+    keys = {
+      {
+        "<leader>nd",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("noice").cmd("dismiss")
+        end,
+        desc = "Noice Dismiss",
+      },
+      {
+        "<leader>nl",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("noice").cmd("last")
+        end,
+        desc = "Noice Last",
+      },
+      {
+        "<leader>nh",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("noice").cmd("history")
+        end,
+        desc = "Noice History",
+      },
+      {
+        "<leader>nt",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("noice").cmd("telescope")
+        end,
+        desc = "Telscope Noice",
+      },
+    },
+  },
+  {
+    "meicale/zellij.nvim",
+    -- If you want to configure the plugin
+    config = function()
+      require("zellij").setup({
+        vimTmuxNavigatorKeybinds = true, -- Will set keybinds like <C-h> to left
+        debug = true, -- Will log things to /tmp/zellij.nvim
+      })
+    end,
+  },
+  {
+    "mg979/vim-visual-multi",
+  },
+  {
+    "NoahTheDuke/vim-just",
+    ft = { "just" },
+  },
   -- these are provided by lazyvim,
   -- highlight instead of underline
   -- { "RRethy/vim-illuminate" },

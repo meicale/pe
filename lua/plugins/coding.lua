@@ -22,6 +22,14 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
+      -- Setup up vim-dadbod -- can be set by lazyvim extra.lang.sql
+      cmp.setup.filetype({ "sql" }, {
+        sources = {
+          { name = "vim-dadbod-completion" },
+          { name = "buffer" },
+        },
+      })
+
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -69,4 +77,5 @@ return {
       lang = "python3",
     },
   },
+  { "czheo/mojo.vim" },
 }
