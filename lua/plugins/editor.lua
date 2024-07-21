@@ -195,15 +195,33 @@ return {
     },
   },
   {
-    "meicale/zellij.nvim",
-    -- If you want to configure the plugin
+    "alexghergh/nvim-tmux-navigation",
     config = function()
-      require("zellij").setup({
-        vimTmuxNavigatorKeybinds = true, -- Will set keybinds like <C-h> to left
-        debug = true, -- Will log things to /tmp/zellij.nvim
+      local nvim_tmux_nav = require("nvim-tmux-navigation")
+
+      nvim_tmux_nav.setup({
+        disable_when_zoomed = false, -- defaults to false
       })
     end,
+    keys = {
+      { "<c-h>", "<cmd>NvimTmuxNavigateLeft<cr>" },
+      { "<c-j>", "<cmd>NvimTmuxNavigateDown<cr>" },
+      { "<c-k>", "<cmd>NvimTmuxNavigateUp<cr>" },
+      { "<c-l>", "<cmd>NvimTmuxNavigateRight<cr>" },
+      { "<c-u>", "<cmd>NvimTmuxNavigateLastActive<cr>" },
+      { "<c-g>", "<cmd>NvimTmuxNavigateNext<cr>" },
+    },
   },
+  -- {
+  --   "meicale/zellij.nvim",
+  --   -- If you want to configure the plugin
+  --   config = function()
+  --     require("zellij").setup({
+  --       vimTmuxNavigatorKeybinds = true, -- Will set keybinds like <C-h> to left
+  --       debug = true, -- Will log things to /tmp/zellij.nvim
+  --     })
+  --   end,
+  -- },
   {
     "mg979/vim-visual-multi",
   },
