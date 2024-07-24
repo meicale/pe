@@ -10,3 +10,5 @@ vim.g.tabby_keybinding_trigger_or_dismiss = "<C-\\>"
 vim.g.neovide_transparency = 0.6
 -- https://github.com/benlubas/molten-nvim/blob/main/docs/Virtual-Environments.md
 vim.g.python3_host_prog = vim.fn.expand("~/micromamba/envs/neovim/bin/python3")
+
+vim.opt.swapfile = false
