@@ -53,66 +53,14 @@ return {
     },
   },
   {
-    "phaazon/hop.nvim",
+    "smoka7/hop.nvim",
     event = "BufRead",
     config = function()
-      require("hop").setup()
-      -- vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-      -- vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
-      vim.api.nvim_set_keymap(
-        "n",
-        "jw",
-        "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "v",
-        "jw",
-        "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "o",
-        "jw",
-        "<cmd> lua require'hop'.hint_words({ hint_position = require'hop.hint'.HintPosition.BEGIN, inclusive_jump = true })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "jr",
-        "<cmd> lua require'hop'.hint_lines({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "v",
-        "jr",
-        "<cmd> lua require'hop'.hint_lines({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "o",
-        "jr",
-        "<cmd> lua require'hop'.hint_lines({ hint_position = require'hop.hint'.HintPosition.BEGIN, inclusive_jump = true })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "jf",
-        "<cmd> lua require'hop'.hint_patterns({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "v",
-        "jf",
-        "<cmd> lua require'hop'.hint_patterns({ hint_position = require'hop.hint'.HintPosition.BEGIN })<cr>",
-        {}
-      )
-      vim.api.nvim_set_keymap(
-        "o",
-        "jf",
-        "<cmd> lua require'hop'.hint_patterns({ hint_position = require'hop.hint'.HintPosition.BEGIN, inclusive_jump = true })<cr>",
-        {}
-      )
+      -- you can configure Hop the way you like here; see :h hop-config
+      require("hop").setup({
+        keys = "etovxqpdygfblzhckisuran",
+        hint_position = require("hop.hint").HintPosition.END,
+      })
     end,
     keys = {
       {
@@ -121,8 +69,15 @@ return {
         function()
           require("hop").hint_words({ hint_position = require("hop.hint").HintPosition.BEGIN })
         end,
-        -- "<cmd>BufferLinePick<cr>",
-        desc = "Hop to word",
+        desc = "Hop to word Begin",
+      },
+      {
+        "<leader>je",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_words({ hint_position = require("hop.hint").HintPosition.EDN })
+        end,
+        desc = "Hop word End",
       },
       {
         "<leader>jr",
@@ -130,10 +85,26 @@ return {
         function()
           require("hop").hint_lines({ hint_position = require("hop.hint").HintPosition.BEGIN })
         end,
-        desc = "Hop to word",
+        desc = "Hop to Row",
       },
       {
-        "<leader>jf",
+        "<leader>jl",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_lines_skip_whitespace({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        desc = "Hop line",
+      },
+      {
+        "<leader>jv",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_vertical({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        desc = "Hop Below",
+      },
+      {
+        "<leader>jq",
         mode = { "n", "x", "o", "v" },
         function()
           require("hop").hint_patterns({ hint_position = require("hop.hint").HintPosition.BEGIN })
@@ -170,7 +141,7 @@ return {
         function()
           require("harpoon"):list():next()
         end,
-        desc = "Harpoon List",
+        desc = "Harpoon Next",
       },
       {
         "<leader>hk",
@@ -178,7 +149,7 @@ return {
         function()
           require("harpoon"):list():prev()
         end,
-        desc = "Harpoon List",
+        desc = "Harpoon Prev",
       },
       {
         "<leader>ha",
@@ -213,20 +184,12 @@ return {
         desc = "Harpoon 4",
       },
       {
-        "<leader>hf",
+        "<leader>hg",
         mode = { "n" },
         function()
           require("harpoon"):list():select(5)
         end,
         desc = "Harpoon 5",
-      },
-      {
-        "<leader>hg",
-        mode = { "n" },
-        function()
-          require("harpoon"):list():select(6)
-        end,
-        desc = "Harpoon 6",
       },
     },
     config = function()
