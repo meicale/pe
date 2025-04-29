@@ -48,7 +48,7 @@ require("lazy").setup({
 
     { import = "custom.python" },
     -- FIXME: comment out next line if you want use neotest-pyhton
-    -- { import = "custom.cpp" },
+    { import = "custom.cpp" },
     { import = "custom.notebook" },
     { import = "custom.paper" },
     { import = "plugins" },

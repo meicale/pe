@@ -234,6 +234,21 @@ return {
     "NoahTheDuke/vim-just",
     ft = { "just" },
   },
+  -- need to install harper.js and the command is
+  -- 'npm install --save harper.js'
+  -- https://writewithharper.com/docs/harperjs/introduction
+  -- require('lspconfig').harper_ls.setup {}
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   ---@class PluginLspOpts
+  --   opts = {
+  --     ---@type lspconfig.options
+  --     servers = {
+  --       -- harper_ls will be automatically installed with mason and loaded with lspconfig
+  --       harper_ls = {},
+  --     },
+  --   },
+  -- },
   -- these are provided by lazyvim,
   -- highlight instead of underline
   -- { "RRethy/vim-illuminate" },
