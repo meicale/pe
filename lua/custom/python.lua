@@ -48,7 +48,7 @@ return {
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
-      "antoinemadec/FixCursorHold.nvim",
+      -- "antoinemadec/FixCursorHold.nvim",
       "nvim-neotest/neotest-python",
     },
       -- it should not be here, move it later
