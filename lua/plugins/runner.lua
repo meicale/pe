@@ -1,4 +1,4 @@
--- iron.nvim is deleated, use vscode run jupyter notebook and sigle sniprun
+-- iron.nvim is moved to custom/notebook.lua
 return {
   {
     "michaelb/sniprun",
@@ -23,10 +23,6 @@ return {
   },
   {
     "stevearc/overseer.nvim",
-    -- config = function()
-    --   templates = { "builtin", "user.run_script" }
-    -- end,
-    cmd = { "CompilerOpen", "CompilerToggleResults", "CompilerRedo" },
     opts = {
       templates = { "builtin", "user.run_script", "user.cpp_build" },
       task_list = {

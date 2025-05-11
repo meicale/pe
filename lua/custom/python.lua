@@ -11,7 +11,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {},
+        -- pyright = {}, -- not using pyright
         ruff_lsp = {
           keys = {
             {

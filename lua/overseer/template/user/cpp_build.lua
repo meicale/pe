@@ -11,7 +11,7 @@ return {
       components = {
         -- "defaults",
         "default",
-        {"on_output_quickfix", open = true },
+        { "on_output_quickfix", open = true },
         {
           "on_output_parse",
           parser = {

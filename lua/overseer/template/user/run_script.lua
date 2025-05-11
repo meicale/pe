@@ -13,6 +13,7 @@ return {
     return {
       cmd = cmd,
       components = {
+        { "on_output_quickfix", open = true },
         {
           "on_output_parse",
           parser = {
@@ -22,7 +23,8 @@ return {
               -- To integrate with other components, items in the "diagnostics" result should match
               -- vim's quickfix item format (:help setqflist)
               -- just to trace the output of the traceback and find the routine of it.
-              { "extract", '[:space:]*File "(.*)", line ([0-9]+), in (.*)', "filename", "lnum", "text" },
+              -- { "extract", '[:space:]*File "(.*)", line ([0-9]+), in (.*)', "filename", "lnum", "text" },
+              { "extract", '[:space:]*File "(.*)", line ([0-9]+),', "filename", "lnum" },
             },
           },
         },
