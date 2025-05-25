@@ -34,6 +34,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.markdown" },
     -- { import = "lazyvim.plugins.extras.lang.python-semshi" }, -- use treesitter instead
     -- { import = "lazyvim.plugins.extras.lang.python" },
+    -- default keymap: <leader>S   -- https://www.lazyvim.org/extras/lang/sql
+    { import = "lazyvim.plugins.extras.lang.sql" },
     { import = "lazyvim.plugins.extras.lang.tex" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lsp.none-ls" },
@@ -48,7 +50,7 @@ require("lazy").setup({
 
     { import = "custom.python" },
     -- FIXME: comment out next line if you want use neotest-pyhton
-    { import = "custom.cpp" },
+    -- { import = "custom.cpp" },
     { import = "custom.notebook" },
     { import = "custom.paper" },
     { import = "plugins" },
