@@ -53,11 +53,14 @@ return {
     },
   },
   {
-    "phaazon/hop.nvim",
+    "smoka7/hop.nvim",
     event = "BufRead",
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
-      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+      require("hop").setup({
+        keys = "etovxqpdygfblzhckisuran",
+        hint_position = require("hop.hint").HintPosition.END,
+      })
     end,
     keys = {
       {
@@ -66,8 +69,15 @@ return {
         function()
           require("hop").hint_words({ hint_position = require("hop.hint").HintPosition.BEGIN })
         end,
-        -- "<cmd>BufferLinePick<cr>",
-        desc = "Hop to word",
+        desc = "Hop to word Begin",
+      },
+      {
+        "<leader>je",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_words({ hint_position = require("hop.hint").HintPosition.EDN })
+        end,
+        desc = "Hop word End",
       },
       {
         "<leader>jr",
@@ -75,10 +85,26 @@ return {
         function()
           require("hop").hint_lines({ hint_position = require("hop.hint").HintPosition.BEGIN })
         end,
-        desc = "Hop to word",
+        desc = "Hop to Row",
       },
       {
-        "<leader>jf",
+        "<leader>jl",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_lines_skip_whitespace({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        desc = "Hop line",
+      },
+      {
+        "<leader>jv",
+        mode = { "n", "x", "o", "v" },
+        function()
+          require("hop").hint_vertical({ hint_position = require("hop.hint").HintPosition.BEGIN })
+        end,
+        desc = "Hop Below",
+      },
+      {
+        "<leader>jq",
         mode = { "n", "x", "o", "v" },
         function()
           require("hop").hint_patterns({ hint_position = require("hop.hint").HintPosition.BEGIN })
@@ -92,43 +118,85 @@ return {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      {
+        "<leader>hh",
+        mode = { "n" },
+        function()
+          require("harpoon"):list():append()
+        end,
+        desc = "Harpoon This",
+      },
+      {
+        "<leader>hl",
+        mode = { "n" },
+        function()
+          require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+        end,
+        desc = "Harpoon List",
+      },
+      {
+        "<leader>hj",
+        mode = { "n" },
+        function()
+          require("harpoon"):list():next()
+        end,
+        desc = "Harpoon Next",
+      },
+      {
+        "<leader>hk",
+        mode = { "n" },
+        function()
+          require("harpoon"):list():prev()
+        end,
+        desc = "Harpoon Prev",
+      },
+      {
+        "<leader>ha",
+        mode = { "n" },
+        function()
+          require("harpoon"):list():select(1)
+        end,
+        desc = "Harpoon 1",
+      },
+      {
+        "<leader>hs",
+        mode = { "n" },
+        function()
+          require("harpoon"):list():select(2)
+        end,
+        desc = "Harpoon 2",
+      },
+      {
+        "<leader>hd",
+        mode = { "n" },
+        function()
+          require("harpoon"):list():select(3)
+        end,
+        desc = "Harpoon 3",
+      },
+      {
+        "<leader>hf",
+        mode = { "n" },
+        function()
+          require("harpoon"):list():select(4)
+        end,
+        desc = "Harpoon 4",
+      },
+      {
+        "<leader>hg",
+        mode = { "n" },
+        function()
+          require("harpoon"):list():select(5)
+        end,
+        desc = "Harpoon 5",
+      },
+    },
     config = function()
       local harpoon = require("harpoon")
 
       -- REQUIRED
       harpoon:setup({})
-
-      -- REQUIRED
-      vim.keymap.set("n", "<leader>hh", function()
-        harpoon:list():append()
-      end)
-      vim.keymap.set("n", "<leader>hl", function()
-        harpoon.ui:toggle_quick_menu(harpoon:list())
-      end)
-
-      -- Toggle previous & next buffers stored within Harpoon list
-      vim.keymap.set("n", "<leader>hk", function()
-        harpoon:list():prev()
-      end)
-      vim.keymap.set("n", "<leader>hj", function()
-        harpoon:list():next()
-      end)
-
-      vim.keymap.set("n", "<leader>ha", function()
-        harpoon:list():select(1)
-      end)
-      vim.keymap.set("n", "<leader>hs", function()
-        harpoon:list():select(2)
-      end)
-      vim.keymap.set("n", "<leader>hd", function()
-        harpoon:list():select(3)
-      end)
-      vim.keymap.set("n", "<leader>hf", function()
-        harpoon:list():select(4)
-      end)
-      vim.keymap.set("n", "<leader>hg", function()
-        harpoon:list():select(5)
-      end)
 
       -- basic telescope configuration
       local conf = require("telescope.config").values
@@ -149,7 +217,7 @@ return {
           })
           :find()
       end
-
+      -- this cannot be setted in keys.
       vim.keymap.set("n", "<leader>ht", function()
         toggle_telescope(harpoon:list())
       end, { desc = "Open harpoon window" })
