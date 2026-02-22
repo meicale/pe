@@ -267,6 +267,10 @@ return {
     "NoahTheDuke/vim-just",
     ft = { "just" },
   },
+  {
+    "karb94/neoscroll.nvim",
+    opts = {},
+  },
   -- need to install harper.js and the command is
   -- 'npm install --save harper.js'
   -- https://writewithharper.com/docs/harperjs/introduction
