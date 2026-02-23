@@ -19,17 +19,6 @@ return {
   },
   -- just for reference
   -- https://codeberg.org/andyg/leap.nvim
-  -- {
-  --   "ggandor/flit.nvim",
-  --   dependencies = {
-  --     -- "ggandor/leap.nvim",
-  --     url = "https://codeberg.org/andyg/leap.nvim",
-  --     "tpope/vim-repeat",
-  --   },
-  --   opts = {
-  --     labeled_modes = "nx",
-  --   },
-  -- },
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -210,15 +199,15 @@ return {
         end
 
         require("telescope.pickers")
-            .new({}, {
-              prompt_title = "Harpoon",
-              finder = require("telescope.finders").new_table({
-                results = file_paths,
-              }),
-              previewer = conf.file_previewer({}),
-              sorter = conf.generic_sorter({}),
-            })
-            :find()
+          .new({}, {
+            prompt_title = "Harpoon",
+            finder = require("telescope.finders").new_table({
+              results = file_paths,
+            }),
+            previewer = conf.file_previewer({}),
+            sorter = conf.generic_sorter({}),
+          })
+          :find()
       end
       -- this cannot be setted in keys.
       vim.keymap.set("n", "<leader>ht", function()
