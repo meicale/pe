@@ -81,7 +81,7 @@ return {
           -- repository = "Qwen/Qwen2.5-Coder-7B",
           -- repository = "bigcode/starcoder2-7b",
           repository = "bigcode/starcoder2-3b",
-        }, -- cf Tokenizer paragraph
+        },                     -- cf Tokenizer paragraph
         -- tokenizer = nil, -- cf Tokenizer paragraph
         context_window = 4096, -- max number of tokens for the context window
         -- context_window = 8192, -- max number of tokens for the context window
@@ -213,13 +213,13 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       --- The below dependencies are optional,
-      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "nvim-mini/mini.pick",           -- for file_selector provider mini.pick
       "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-      "ibhagwan/fzf-lua", -- for file_selector provider fzf
-      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "hrsh7th/nvim-cmp",              -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua",              -- for file_selector provider fzf
+      "nvim-tree/nvim-web-devicons",   -- or nvim-mini/mini.icons
       "giuxtaposition/blink-cmp-copilot",
-      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      "zbirenbaum/copilot.lua",        -- for providers='copilot'
       {
         -- support for image pasting
         "HakonHarnes/img-clip.nvim",
